@@ -3,8 +3,9 @@ pipeline {
     stages {
         stage('Build') {
             agent {
-                any {
+                docker {
                     image 'python:latest'
+                    args '-u root' // Run as root to ensure permissions
                 }
             }
             steps {
@@ -13,8 +14,9 @@ pipeline {
         }
         stage('Test') {
             agent {
-                any {
+                docker {
                     image 'qnib/pytest'
+                    args '-u root'
                 }
             }
             steps {
@@ -28,8 +30,9 @@ pipeline {
         }
         stage('Deliver') {
             agent {
-                any {
+                docker {
                     image 'cdrx/pyinstaller-linux:python2'
+                    args '-u root'
                 }
             }
             steps {
