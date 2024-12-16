@@ -8,7 +8,7 @@ pipeline {
                 }
             }
             steps {
-                sh 'which python'
+                sh 'python --version'
             }
         }
         stage('Test') {
